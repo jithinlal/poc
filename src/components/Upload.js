@@ -1,9 +1,12 @@
 import React from 'react';
 import { Grid } from '@mui/material';
 import { Dropzone, FileItem, FullScreenPreview } from '@dropzone-ui/react';
+import { useDispatch } from 'react-redux';
+import { uploadFiles } from '../store/actions/file.action';
 
-function Upload() {
+function Upload({ folderName }) {
 	const [files, setFiles] = React.useState([]);
+	const dispatch = useDispatch();
 
 	const [imageSrc, setImageSrc] = React.useState(undefined);
 	const updateFiles = (incommingFiles) => {
@@ -28,11 +31,16 @@ function Upload() {
 				label={'Drop Files here or click to browse'}
 				minHeight={'195px'}
 				maxHeight={'500px'}
-				url={'http://localhost:3001/upload'}
+				url={`http://localhost:3001/api/upload/${folderName}`}
 				method={'POST'}
-				fakeupload
-				uploadOnDrop
 				disableScroll
+				onUploadFinish={(responses) => {
+					dispatch(
+						uploadFiles(
+							responses.map((response) => response.serverResponse.payload),
+						),
+					);
+				}}
 			>
 				{files.map((file) => (
 					<FileItem

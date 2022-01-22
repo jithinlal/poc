@@ -11,7 +11,6 @@ import { trimWord } from '../Utils/helpers';
 import { logout } from '../store/actions/auth.action';
 import { IconButton } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
-import Upload from '../components/Upload';
 
 function handleClick(event) {
 	event.preventDefault();
@@ -32,9 +31,9 @@ function Home() {
 	const navigate = useNavigate();
 
 	const [labels, setLabels] = React.useState([
-		{ id: 1, name: 'Office Docs', route: 'office-docs' },
+		{ id: 1, name: 'Office docs', route: 'office-docs' },
 		{ id: 2, name: 'Personal docs', route: 'personal-docs' },
-		{ id: 3, name: 'Nextport', route: 'nextport' },
+		{ id: 3, name: 'Project docs', route: 'project-docs' },
 	]);
 
 	return (
@@ -79,7 +78,6 @@ function Home() {
 					))}
 				</Grid>
 			</Grid>
-			<Upload />
 		</Container>
 	);
 }

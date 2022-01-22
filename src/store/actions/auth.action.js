@@ -11,10 +11,12 @@ export function login() {
 		try {
 			dispatch(showLoading());
 			const response = await signInWithPopup(auth, provider);
-			// console.log({ response, credential });
 			const { email, uid, refreshToken } = response.user;
-
 			dispatch(hideLoading());
+			if (!email.endsWith('neoito.com')) {
+				throw new Error('Email is not from neoito.com');
+			}
+
 			await localStorage.setItem('auth', true);
 			await localStorage.setItem('email', email);
 			await localStorage.setItem('token', refreshToken);
