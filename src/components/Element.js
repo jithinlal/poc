@@ -1,7 +1,6 @@
-import React from 'react';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-import Breadcrumb from './Components/Breadcrumb';
+import Breadcrumb from './Breadcrumb';
 
 function Element() {
 	return (
