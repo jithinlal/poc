@@ -31,20 +31,3 @@ export function getFiles(folderName) {
 		}
 	};
 }
-
-export function uploadFiles(files) {
-	return async (dispatch, getState) => {
-		try {
-			dispatch({
-				type: UPLOAD_FILES,
-				files,
-			});
-		} catch (error) {
-			dispatch(hideLoading());
-			console.log(error);
-			throw new Error(
-				'Could not uploaded files at the moment, please try again later.',
-			);
-		}
-	};
-}

@@ -11,6 +11,7 @@ import { getFiles } from '../store/actions/file.action';
 import Breadcrumb from './Breadcrumb';
 import Upload from './Upload';
 import { trimWord } from '../Utils/helpers';
+import { CLEAR_FILES } from '../store/types/file';
 
 function Element() {
 	const dispatch = useDispatch();
@@ -19,6 +20,11 @@ function Element() {
 	const files = useSelector((state) => state.file.files);
 	useEffect(() => {
 		dispatch(getFiles(folderName));
+
+		return () =>
+			dispatch({
+				type: CLEAR_FILES,
+			});
 	}, [dispatch, folderName]);
 
 	return (
@@ -29,6 +35,7 @@ function Element() {
 						<Breadcrumb />
 					</div>
 				</Grid>
+				<Upload folderName={folderName} />
 				<Grid container direction='row'>
 					{files.map((file) => {
 						let variant;
@@ -87,7 +94,6 @@ function Element() {
 					})}
 				</Grid>
 			</Grid>
-			<Upload folderName={folderName} />
 		</Container>
 	);
 }

@@ -1,4 +1,4 @@
-import { LIST_FILES, UPLOAD_FILES } from '../types/file';
+import { LIST_FILES, UPLOAD_FILES, CLEAR_FILES } from '../types/file';
 
 const initialState = {
 	files: [],
@@ -17,6 +17,11 @@ export default function fileAction(state = initialState, action) {
 			return {
 				...state,
 				files: [...state.files, ...action.files],
+			};
+		case CLEAR_FILES:
+			return {
+				...state,
+				files: [],
 			};
 		default:
 			return state;

@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid } from '@mui/material';
 import { Dropzone, FileItem, FullScreenPreview } from '@dropzone-ui/react';
 import { useDispatch } from 'react-redux';
-import { uploadFiles } from '../store/actions/file.action';
+import { UPLOAD_FILES } from '../store/types/file';
 
 function Upload({ folderName }) {
 	const [files, setFiles] = React.useState([]);
@@ -25,8 +25,8 @@ function Upload({ folderName }) {
 			<Dropzone
 				onChange={updateFiles}
 				value={files}
-				onClean
 				maxFileSize={10485760}
+				maxFiles={5}
 				accept={'image/png, image/jpeg, image/jpg, .pdf, .docx'}
 				label={'Drop Files here or click to browse'}
 				minHeight={'195px'}
@@ -35,11 +35,10 @@ function Upload({ folderName }) {
 				method={'POST'}
 				disableScroll
 				onUploadFinish={(responses) => {
-					dispatch(
-						uploadFiles(
-							responses.map((response) => response.serverResponse.payload),
-						),
-					);
+					dispatch({
+						type: UPLOAD_FILES,
+						files: responses.map((response) => response.serverResponse.payload),
+					});
 				}}
 			>
 				{files.map((file) => (
