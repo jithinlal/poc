@@ -4,7 +4,9 @@ const initialState = {
 	uid: null,
 	email: null,
 	authenticated: false,
-	token: null,
+	sessionId: null,
+	jwt: null,
+	jwtCreated: null,
 };
 
 export default function authAction(state = initialState, action) {
@@ -16,7 +18,9 @@ export default function authAction(state = initialState, action) {
 					uid: action.uid,
 					email: action.email,
 					authenticated: action.authenticated,
-					token: action.token,
+					sessionId: action.sessionId,
+					jwt: action.jwt,
+					jwtCreated: action.jwtCreated,
 				},
 			};
 		case LOGOUT:
@@ -26,7 +30,9 @@ export default function authAction(state = initialState, action) {
 					uid: null,
 					email: null,
 					authenticated: false,
-					token: null,
+					sessionId: null,
+					jwt: null,
+					jwtCreated: null,
 				},
 			};
 		default:

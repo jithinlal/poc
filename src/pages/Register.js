@@ -4,16 +4,16 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import { Button, Snackbar, TextField } from '@mui/material';
-import { login } from '../store/actions/auth.action';
+import { register } from '../store/actions/auth.action';
 import { useNavigate } from 'react-router-dom';
 
-function Login() {
+function Register() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [open, setOpen] = useState(false);
 	const [error, setError] = useState('');
-	const [email, setEmail] = useState('jithinlal.pr@neoito.com');
-	const [password, setPassword] = useState('Change123#');
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
 
 	const handleClose = (event, reason) => {
 		if (reason === 'clickaway') {
@@ -22,9 +22,9 @@ function Login() {
 		setOpen(false);
 	};
 
-	const handleLogin = async () => {
+	const handleRegister = async () => {
 		try {
-			await dispatch(login(email, password));
+			await dispatch(register(email, password));
 			navigate('/');
 		} catch (error) {
 			setOpen(true);
@@ -42,7 +42,7 @@ function Login() {
 				justifyContent='center'
 				style={{ minHeight: '100vh' }}
 			>
-				<Grid item xs={3}>
+				<Grid item>
 					<Stack direction='column' spacing={2}>
 						<TextField
 							label='Email'
@@ -58,11 +58,15 @@ function Login() {
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
 						/>
-						<Button color='secondary' onClick={handleLogin} variant='outlined'>
-							LOGIN
+						<Button
+							color='secondary'
+							onClick={handleRegister}
+							variant='outlined'
+						>
+							REGISTER
 						</Button>
-						<Button color='info' onClick={() => navigate('/register')}>
-							New user?
+						<Button color='info' onClick={() => navigate('/login')}>
+							Got an account?
 						</Button>
 					</Stack>
 				</Grid>
@@ -78,4 +82,4 @@ function Login() {
 	);
 }
 
-export default Login;
+export default Register;

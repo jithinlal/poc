@@ -8,16 +8,18 @@ import ImageIcon from '@mui/icons-material/Image';
 import ArticleIcon from '@mui/icons-material/Article';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { getFiles } from '../store/actions/file.action';
-import Breadcrumb from './Breadcrumb';
-import Upload from './Upload';
+import Upload from '../components/Upload';
 import { trimWord } from '../Utils/helpers';
 import { CLEAR_FILES } from '../store/types/file';
+import Header from '../components/Header';
+import appwrite from '../appwrite.config';
 
 function Element() {
 	const dispatch = useDispatch();
 	const breadcrumbs = useBreadcrumbs();
 	const folderName = breadcrumbs[breadcrumbs.length - 1].key.slice(1);
 	const files = useSelector((state) => state.file.files);
+
 	useEffect(() => {
 		dispatch(getFiles(folderName));
 
@@ -30,11 +32,7 @@ function Element() {
 	return (
 		<Container fixed>
 			<Grid container>
-				<Grid item xs={12} md={12} lg={12} marginLeft={5} marginTop={5}>
-					<div role='presentation'>
-						<Breadcrumb />
-					</div>
-				</Grid>
+				<Header />
 				<Upload folderName={folderName} />
 				<Grid container direction='row'>
 					{files.map((file) => {
@@ -44,9 +42,8 @@ function Element() {
 								<>
 									<ImageIcon sx={{ fontSize: 200 }} />
 									<Typography variant='h4'>{trimWord(file.name)}</Typography>
-									{/* TODO :: projectID should be in a environment variable */}
 									<Button
-										href={`http://localhost/v1/storage/files/${file.$id}/view?project=61ec39a34ab3c51ae226&mode=admin`}
+										href={appwrite.storage.getFileView(file.$id)}
 										target='_blank'
 									>
 										View / Download
@@ -59,7 +56,7 @@ function Element() {
 									<PictureAsPdfIcon sx={{ fontSize: 200 }} />
 									<Typography variant='h4'>{trimWord(file.name)}</Typography>
 									<Button
-										href={`http://localhost/v1/storage/files/${file.$id}/view?project=61ec39a34ab3c51ae226&mode=admin`}
+										href={appwrite.storage.getFileView(file.$id)}
 										target='_blank'
 									>
 										View / Download
@@ -72,7 +69,7 @@ function Element() {
 									<ArticleIcon sx={{ fontSize: 200 }} />
 									<Typography variant='h4'>{trimWord(file.name)}</Typography>
 									<Button
-										href={`http://localhost/v1/storage/files/${file.$id}/view?project=61ec39a34ab3c51ae226&mode=admin`}
+										href={appwrite.storage.getFileView(file.$id)}
 										target='_blank'
 									>
 										View / Download

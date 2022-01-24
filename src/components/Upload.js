@@ -1,12 +1,13 @@
 import React from 'react';
 import { Grid } from '@mui/material';
 import { Dropzone, FileItem, FullScreenPreview } from '@dropzone-ui/react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { UPLOAD_FILES } from '../store/types/file';
 
 function Upload({ folderName }) {
 	const [files, setFiles] = React.useState([]);
 	const dispatch = useDispatch();
+	const jwt = useSelector((state) => state.auth.jwt);
 
 	const [imageSrc, setImageSrc] = React.useState(undefined);
 	const updateFiles = (incommingFiles) => {
@@ -33,6 +34,11 @@ function Upload({ folderName }) {
 				maxHeight={'500px'}
 				url={`http://localhost:3001/api/upload/${folderName}`}
 				method={'POST'}
+				config={{
+					headers: {
+						authorization: `Bearer ${jwt}`,
+					},
+				}}
 				disableScroll
 				onUploadFinish={(responses) => {
 					dispatch({
