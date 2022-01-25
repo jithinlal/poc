@@ -12,11 +12,11 @@ import Header from '../components/Header';
 function Home() {
 	const navigate = useNavigate();
 
-	const [labels, setLabels] = React.useState([
+	const labels = [
 		{ id: 1, name: 'Office docs', route: 'office-docs' },
 		{ id: 2, name: 'Personal docs', route: 'personal-docs' },
 		{ id: 3, name: 'Project docs', route: 'project-docs' },
-	]);
+	];
 
 	return (
 		<Container fixed>
