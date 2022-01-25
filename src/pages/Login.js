@@ -12,8 +12,8 @@ function Login() {
 	const navigate = useNavigate();
 	const [open, setOpen] = useState(false);
 	const [error, setError] = useState('');
-	const [email, setEmail] = useState('jithinlal.pr@neoito.com');
-	const [password, setPassword] = useState('Change123#');
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
 
 	const handleClose = (event, reason) => {
 		if (reason === 'clickaway') {
