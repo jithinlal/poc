@@ -32,7 +32,7 @@ function Upload({ folderName }) {
 				label={'Drop Files here or click to browse'}
 				minHeight={'195px'}
 				maxHeight={'500px'}
-				url={`http://localhost:3001/api/upload/${folderName}`}
+				url={`${process.env.REACT_APP_API}/api/upload/${folderName}`}
 				method={'POST'}
 				config={{
 					headers: {
