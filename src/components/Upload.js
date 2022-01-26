@@ -26,7 +26,7 @@ function Upload({ folderName }) {
 			<Dropzone
 				onChange={updateFiles}
 				value={files}
-				maxFileSize={10485760}
+				maxFileSize={1048576}
 				maxFiles={5}
 				accept={'image/png, image/jpeg, image/jpg, .pdf, .docx'}
 				label={'Drop Files here or click to browse'}
