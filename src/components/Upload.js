@@ -27,7 +27,6 @@ function Upload({ folderName }) {
 				onChange={updateFiles}
 				value={files}
 				maxFileSize={1048576}
-				maxFiles={5}
 				accept={'image/png, image/jpeg, image/jpg, .pdf, .docx'}
 				label={'Drop Files here or click to browse'}
 				minHeight={'195px'}
