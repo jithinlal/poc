@@ -21,7 +21,6 @@ function Element() {
 	const files = useSelector((state) => state.file.files);
 
 	useEffect(() => {
-		console.log(appwrite.account.get().then((res) => console.log(res)));
 		dispatch(getFiles(folderName));
 
 		return () =>
